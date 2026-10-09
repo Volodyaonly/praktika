@@ -1,0 +1,158 @@
+//public class Main {
+//    public static void main(String[] args) {
+//        MovablePoint mp = new MovablePoint(0, 0, 1, 2);
+//        System.out.println(mp);
+//        mp.moveUp(); mp.moveRight();
+//        System.out.println("После moveUp+moveRight: " + mp);
+//        MovableCircle mc = new MovableCircle(5, 5, 1, 1, 10);
+//        System.out.println(mc);
+//        mc.moveDown(); mc.moveLeft();
+//        System.out.println("После moveDown+moveLeft: " + mc);
+//        MovableRectangle mr = new MovableRectangle(0, 0, 4, 4, 1, 1);
+//        System.out.println("SpeedTest: " + mr.speedTest());
+//        mr.moveUp();
+//        System.out.println("После moveUp: " + mr);
+//        Planet planet = new Planet("Земля");
+//        Animal animal = new Animal("Лев");
+//        Car car = new Car("Toyota");
+//        System.out.println(planet.getName());
+//        System.out.println(animal.getName());
+//        System.out.println(car.getName());
+//        Priceable[] items = { new BookP("Война и мир", 1500), new Phone("iPhone", 90000) };
+//        for (Priceable p : items) System.out.println("Цена: " + p.getPrice());
+//        Printable[] printables = {
+//                new BookP("Война и мир", 1500),
+//                new BookP("Отцы и дети", 1200),
+//                new ShopP("М.Видео"),
+//                new Magazine("Хакер"),
+//                new Magazine("Наука и жизнь")
+//        };
+//        for (Printable p : printables) p.print();
+//        System.out.println("\nТолько журналы:");
+//        Magazine.printMagazines(printables);
+//        System.out.println("\nТолько книги:");
+//        BookP.printBooks(printables);
+//    }
+//}
+//interface Movable {
+//    void moveUp();
+//    void moveDown();
+//    void moveLeft();
+//    void moveRight();
+//}
+//class MovablePoint implements Movable {
+//    int x, y, xSpeed, ySpeed;
+//    public MovablePoint(int x, int y, int xSpeed, int ySpeed) {
+//        this.x = x; this.y = y; this.xSpeed = xSpeed; this.ySpeed = ySpeed;
+//    }
+//    @Override public void moveUp()    { y += ySpeed; }
+//    @Override public void moveDown()  { y -= ySpeed; }
+//    @Override public void moveLeft()  { x -= xSpeed; }
+//    @Override public void moveRight() { x += xSpeed; }
+//    @Override
+//    public String toString() {
+//        return "MovablePoint{x=" + x + ", y=" + y + ", xSpeed=" + xSpeed + ", ySpeed=" + ySpeed + "}";
+//    }
+//}
+//class MovableCircle implements Movable {
+//    private int radius;
+//    private MovablePoint center;
+//    public MovableCircle(int x, int y, int xSpeed, int ySpeed, int radius) {
+//        this.center = new MovablePoint(x, y, xSpeed, ySpeed);
+//        this.radius = radius;
+//    }
+//    @Override public void moveUp()    { center.moveUp(); }
+//    @Override public void moveDown()  { center.moveDown(); }
+//    @Override public void moveLeft()  { center.moveLeft(); }
+//    @Override public void moveRight() { center.moveRight(); }
+//    @Override
+//    public String toString() {
+//        return "MovableCircle{radius=" + radius + ", center=" + center + "}";
+//    }
+//}
+//class MovableRectangle implements Movable {
+//    private MovablePoint topLeft;
+//    private MovablePoint bottomRight;
+//    public MovableRectangle(int x1, int y1, int x2, int y2, int xSpeed, int ySpeed) {
+//        this.topLeft = new MovablePoint(x1, y1, xSpeed, ySpeed);
+//        this.bottomRight = new MovablePoint(x2, y2, xSpeed, ySpeed);
+//    }
+//    public boolean speedTest() {
+//        return topLeft.xSpeed == bottomRight.xSpeed && topLeft.ySpeed == bottomRight.ySpeed;
+//    }
+//    @Override public void moveUp()    { topLeft.moveUp();    bottomRight.moveUp(); }
+//    @Override public void moveDown()  { topLeft.moveDown();  bottomRight.moveDown(); }
+//    @Override public void moveLeft()  { topLeft.moveLeft();  bottomRight.moveLeft(); }
+//    @Override public void moveRight() { topLeft.moveRight(); bottomRight.moveRight(); }
+//    @Override
+//    public String toString() {
+//        return "MovableRectangle{topLeft=" + topLeft + ", bottomRight=" + bottomRight + "}";
+//    }
+//}
+//interface Nameable {
+//    String getName();
+//}
+//class Planet implements Nameable {
+//    private String name;
+//    public Planet(String name) { this.name = name; }
+//    @Override public String getName() { return "Планета: " + name; }
+//}
+//class Animal implements Nameable {
+//    private String name;
+//    public Animal(String name) { this.name = name; }
+//    @Override public String getName() { return "Животное: " + name; }
+//}
+//class Car implements Nameable {
+//    private String name;
+//    public Car(String name) { this.name = name; }
+//    @Override public String getName() { return "Машина: " + name; }
+//}
+//interface Priceable {
+//    double getPrice();
+//}
+//class Phone implements Priceable {
+//    private String model;
+//    private double price;
+//    public Phone(String model, double price) { this.model = model; this.price = price; }
+//    @Override public double getPrice() { return price; }
+//}
+//interface Printable {
+//    void print();
+//}
+//class BookP implements Printable, Priceable {
+//    private String title;
+//    private double price;
+//    public BookP(String title, double price) {
+//        this.title = title;
+//        this.price = price;
+//    }
+//    @Override
+//    public void print() {
+//        System.out.println("Книга: " + title + " (цена " + price + ")");
+//    }
+//    @Override public double getPrice() { return price; }
+//    public static void printBooks(Printable[] printables) {
+//        for (Printable p : printables) {
+//            if (p instanceof BookP) p.print();
+//        }
+//    }
+//}
+//class Magazine implements Printable {
+//    private String name;
+//    public Magazine(String name) { this.name = name; }
+//    @Override
+//    public void print() {
+//        System.out.println("Журнал: " + name);
+//    }
+//    public static void printMagazines(Printable[] printables) {
+//        for (Printable p : printables) {
+//            if (p instanceof Magazine) p.print();
+//        }
+//    }
+//}
+//class ShopP implements Printable {
+//    private String name;
+//    public ShopP(String name) { this.name = name; }
+//    @Override
+//    public void print() { System.out.println("Магазин: " + name); }
+//}
