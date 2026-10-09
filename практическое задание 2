@@ -1,0 +1,383 @@
+//Задание 1
+//public class Main {
+//    public static void main(String[] args) {
+//        Author a1 = new Author("Иван Петров", "ivan@mail.ru", 'm');
+//        Author a2 = new Author("Анна Сидорова", "anna@mail.ru", 'f');
+//        System.out.println(a1);
+//        System.out.println(a2);
+//        a1.setEmail("new_ivan@mail.ru");
+//        System.out.println("После смены email: " + a1);
+//    }
+//}
+//class Author {
+//    private String name;
+//    private String email;
+//    private char gender;
+//    public Author(String name, String email, char gender) {
+//        this.name = name;
+//        this.email = email;
+//        this.gender = gender;
+//    }
+//    public String getName() { return name; }
+//    public String getEmail() { return email; }
+//    public void setEmail(String email) { this.email = email; }
+//    public char getGender() { return gender; }
+//    @Override
+//    public String toString() {
+//        return "Author{name='" + name + "', email='" + email + "', gender=" + gender + "}";
+//    }
+//}
+
+//Задание 2
+//public class Main {
+//    public static void main(String[] args) {
+//        Ball b1 = new Ball(1.0, 2.0);
+//        System.out.println(b1);
+//        Ball b2 = new Ball();
+//        System.out.println(b2);
+//        b1.move(3.0, 4.0);
+//        System.out.println("После move: " + b1);
+//        b2.setXY(5.5, 6.5);
+//        System.out.println("После setXY: " + b2);
+//    }
+//}
+//class Ball {
+//    private double x = 0.0;
+//    private double y = 0.0;
+//    public Ball(double x, double y) {
+//        this.x = x;
+//        this.y = y;
+//    }
+//    public Ball() {}
+//    public double getX() { return x; }
+//    public void setX(double x) { this.x = x; }
+//    public double getY() { return y; }
+//    public void setY(double y) { this.y = y; }
+//    public void setXY(double x, double y) { this.x = x; this.y = y; }
+//    public void move(double xDisp, double yDisp) { x += xDisp; y += yDisp; }
+//    @Override
+//    public String toString() {
+//        return "Ball{x=" + x + ", y=" + y + "}";
+//    }
+//}
+
+//Задание 3
+//public class Main {
+//    public static void main(String[] args) {
+//        Circle[] circles = new Circle[5];
+//        circles[0] = new Circle(new Point(0, 0), 5.0);
+//        circles[1] = new Circle(new Point(1, 1), 2.0);
+//        circles[2] = new Circle(new Point(2, 2), 10.0);
+//        circles[3] = new Circle(new Point(3, 3), 1.0);
+//        circles[4] = new Circle(new Point(4, 4), 7.0);
+//        Tester tester = new Tester(circles, circles.length);
+//        System.out.println("Самая маленькая окружность: " + tester.findSmallest());
+//        System.out.println("Самая большая окружность: " + tester.findLargest());
+//        tester.sortByRadius();
+//        System.out.println("Отсортированные окружности:");
+//        for (Circle c : circles) System.out.println(c);
+//    }
+//}
+//class Point {
+//    private double x, y;
+//    public Point(double x, double y) { this.x = x; this.y = y; }
+//    public double getX() { return x; }
+//    public double getY() { return y; }
+//    @Override public String toString() { return "(" + x + "; " + y + ")"; }
+//}
+//class Circle {
+//    private Point center;
+//    private double radius;
+//    public Circle(Point center, double radius) {
+//        this.center = center;
+//        this.radius = radius;
+//    }
+//    public Point getCenter() { return center; }
+//    public double getRadius() { return radius; }
+//    public double getLength() { return 2 * Math.PI * radius; }
+//    public double getArea() { return Math.PI * radius * radius; }
+//    @Override
+//    public String toString() {
+//        return "Circle{center=" + center + ", radius=" + radius + "}";
+//    }
+//}
+//class Tester {
+//    private Circle[] circles;
+//    private int count;
+//    public Tester(Circle[] circles, int count) {
+//        this.circles = circles;
+//        this.count = count;
+//    }
+//    public Circle findSmallest() {
+//        Circle min = circles[0];
+//        for (int i = 1; i < count; i++)
+//            if (circles[i].getRadius() < min.getRadius()) min = circles[i];
+//        return min;
+//    }
+//    public Circle findLargest() {
+//        Circle max = circles[0];
+//        for (int i = 1; i < count; i++)
+//            if (circles[i].getRadius() > max.getRadius()) max = circles[i];
+//        return max;
+//    }
+//    public void sortByRadius() {
+//        for (int i = 0; i < count - 1; i++)
+//            for (int j = 0; j < count - i - 1; j++)
+//                if (circles[j].getRadius() > circles[j + 1].getRadius()) {
+//                    Circle temp = circles[j];
+//                    circles[j] = circles[j + 1];
+//                    circles[j + 1] = temp;
+//                }
+//    }
+//}
+
+//Задание 4
+//import java.util.ArrayList;
+//import java.util.Scanner;
+//public class Main {
+//    public static void main(String[] args) {
+//        Shop shop = new Shop();
+//        Scanner sc = new Scanner(System.in);
+//        shop.addComputer(new Computer("Intel i5", 16, 512, "ASUS"));
+//        shop.addComputer(new Computer("AMD Ryzen 7", 32, 1024, "MSI"));
+//        shop.addComputer(new Computer("Intel i7", 8, 256, "HP"));
+//        System.out.println("Все компьютеры в магазине:");
+//        shop.printAll();
+//        System.out.print("Введите марку для поиска: ");
+//        String brand = sc.nextLine();
+//        Computer found = shop.findByBrand(brand);
+//        if (found != null) System.out.println("Найден: " + found);
+//        else System.out.println("Компьютер не найден");
+//        System.out.print("Введите марку для удаления: ");
+//        String delBrand = sc.nextLine();
+//        shop.removeByBrand(delBrand);
+//        System.out.println("После удаления:");
+//        shop.printAll();
+//        sc.close();
+//    }
+//}
+//class Computer {
+//    private String cpu;
+//    private int ram;
+//    private int storage;
+//    private String brand;
+//    public Computer(String cpu, int ram, int storage, String brand) {
+//        this.cpu = cpu;
+//        this.ram = ram;
+//        this.storage = storage;
+//        this.brand = brand;
+//    }
+//    public String getBrand() { return brand; }
+//    @Override
+//    public String toString() {
+//        return "Computer{cpu='" + cpu + "', ram=" + ram + "GB, storage=" + storage + "GB, brand='" + brand + "'}";
+//    }
+//}
+//class Shop {
+//    private ArrayList<Computer> computers = new ArrayList<>();
+//    public void addComputer(Computer c) { computers.add(c); }
+//    public void removeByBrand(String brand) {
+//        computers.removeIf(c -> c.getBrand().equalsIgnoreCase(brand));
+//    }
+//    public Computer findByBrand(String brand) {
+//        for (Computer c : computers)
+//            if (c.getBrand().equalsIgnoreCase(brand)) return c;
+//        return null;
+//    }
+//    public void printAll() {
+//        if (computers.isEmpty()) System.out.println("Магазин пуст");
+//        else for (Computer c : computers) System.out.println(c);
+//    }
+//}
+
+
+//Задание 5
+//public class Main {
+//    public static void main(String[] args) {
+//        Dog[] dogs = new Dog[3];
+//        dogs[0] = new Dog("Шарик", 3);
+//        dogs[1] = new Dog("Бобик", 5);
+//        dogs[2] = new Dog("Рекс", 2);
+//        for (Dog d : dogs) System.out.println(d);
+//    }
+//}
+//class Dog {
+//    private String name;
+//    private int age;
+//    public Dog(String name, int age) {
+//        this.name = name;
+//        this.age = age;
+//    }
+//    public String getName() { return name; }
+//    public void setName(String name) { this.name = name; }
+//    public int getAge() { return age; }
+//    public void setAge(int age) { this.age = age; }
+//    public int getHumanAge() { return age * 7; }
+//    @Override
+//    public String toString() {
+//        return "Dog{name='" + name + "', age=" + age + ", humanAge=" + getHumanAge() + "}";
+//    }
+//}
+
+
+//Задание 6
+//public class Main {
+//    public static void main(String[] args) {
+//        Circle c1 = new Circle(5.0);
+//        Circle c2 = new Circle(7.5);
+//        System.out.println(c1);
+//        System.out.println(c2);
+//        System.out.println("Площадь c1 = " + c1.getArea());
+//        System.out.println("Длина c2 = " + c2.getLength());
+//        System.out.println("c1 больше c2? " + c1.isBigger(c2));
+//    }
+//}
+//class Circle {
+//    private double radius;
+//    public Circle(double radius) { this.radius = radius; }
+//    public double getRadius() { return radius; }
+//    public void setRadius(double radius) { this.radius = radius; }
+//    public double getArea() { return Math.PI * radius * radius; }
+//    public double getLength() { return 2 * Math.PI * radius; }
+//    public boolean isBigger(Circle other) { return this.radius > other.radius; }
+//    @Override
+//    public String toString() { return "Circle{radius=" + radius + "}"; }
+//}
+
+
+//Задание 7
+//public class Main {
+//    public static void main(String[] args) {
+//        BookShelf shelf = new BookShelf(5);
+//        shelf.addBook(new Book("Толстой", "Война и мир", 1863));
+//        shelf.addBook(new Book("Тургенев", "Отцы и дети", 1862));
+//        shelf.addBook(new Book("Достоевский", "Преступление и наказание", 1866));
+//        shelf.addBook(new Book("Пушкин", "Евгений Онегин", 1833));
+//        System.out.println("Все книги:");
+//        shelf.printAll();
+//        System.out.println("Самая поздняя: " + shelf.getLatest());
+//        System.out.println("Самая ранняя: " + shelf.getEarliest());
+//        shelf.sortByYear();
+//        System.out.println("После сортировки по году:");
+//        shelf.printAll();
+//    }
+//}
+//class Book {
+//    private String author;
+//    private String title;
+//    private int year;
+//    public Book(String author, String title, int year) {
+//        this.author = author;
+//        this.title = title;
+//        this.year = year;
+//    }
+//    public int getYear() { return year; }
+//    @Override
+//    public String toString() {
+//        return "Book{author='" + author + "', title='" + title + "', year=" + year + "}";
+//    }
+//}
+//class BookShelf {
+//    private Book[] books;
+//    private int count;
+//    public BookShelf(int size) {
+//        books = new Book[size];
+//        count = 0;
+//    }
+//    public void addBook(Book b) {
+//        if (count < books.length) books[count++] = b;
+//    }
+//    public Book getLatest() {
+//        Book latest = books[0];
+//        for (int i = 1; i < count; i++)
+//            if (books[i].getYear() > latest.getYear()) latest = books[i];
+//        return latest;
+//    }
+//    public Book getEarliest() {
+//        Book earliest = books[0];
+//        for (int i = 1; i < count; i++)
+//            if (books[i].getYear() < earliest.getYear()) earliest = books[i];
+//        return earliest;
+//    }
+//    public void sortByYear() {
+//        for (int i = 0; i < count - 1; i++)
+//            for (int j = 0; j < count - i - 1; j++)
+//                if (books[j].getYear() > books[j + 1].getYear()) {
+//                    Book tmp = books[j];
+//                    books[j] = books[j + 1];
+//                    books[j + 1] = tmp;
+//                }
+//    }
+//    public void printAll() {
+//        for (int i = 0; i < count; i++) System.out.println(books[i]);
+//    }
+//}
+
+
+//Задание 8
+//import java.util.Scanner;
+//public class Main {
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        System.out.print("Введите количество строк: ");
+//        int n = sc.nextInt();
+//        sc.nextLine();
+//        String[] arr = new String[n];
+//        for (int i = 0; i < n; i++) {
+//            System.out.print("Строка " + (i + 1) + ": ");
+//            arr[i] = sc.nextLine();
+//        }
+//        String[] reversed = new String[n];
+//        for (int i = 0; i < n; i++) reversed[i] = arr[n - 1 - i];
+//        System.out.println("Исходный массив: ");
+//        for (String s : arr) System.out.print(s + " ");
+//        System.out.println("\nОбратный массив: ");
+//        for (String s : reversed) System.out.print(s + " ");
+//        sc.close();
+//    }
+//}
+
+//Задание 9
+//import java.util.ArrayList;
+//import java.util.Collections;
+//import java.util.Scanner;
+//public class Main {
+//    public static void main(String[] args) {
+//        String[] suits = {"Пики", "Черви", "Бубны", "Трефы"};
+//        String[] ranks = {"2","3","4","5","6","7","8","9","10","В","Д","К","Т"};
+//        ArrayList<String> deck = new ArrayList<>();
+//        for (String s : suits)
+//            for (String r : ranks)
+//                deck.add(r + " " + s);
+//        Collections.shuffle(deck);
+//        Scanner sc = new Scanner(System.in);
+//        System.out.print("Введите число игроков: ");
+//        int n = sc.nextInt();
+//        int card = 0;
+//        for (int i = 1; i <= n; i++) {
+//            System.out.println("Игрок " + i + ":");
+//            for (int j = 0; j < 5; j++)
+//                System.out.println("  " + deck.get(card++));
+//            System.out.println();
+//        }
+//        sc.close();
+//    }
+//}
+
+
+//Задание 10
+//import java.util.Scanner;
+//public class Main {
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        System.out.print("Введите строку: ");
+//        String line = sc.nextLine().trim();
+//        if (line.isEmpty()) {
+//            System.out.println("Слов: 0");
+//        } else {
+//            String[] words = line.split("\\s+");
+//            System.out.println("Слов: " + words.length);
+//        }
+//        sc.close();
+//    }
+//}
