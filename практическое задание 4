@@ -1,0 +1,110 @@
+//Задание 1
+//public class Main {
+//    public static void main(String[] args) {
+//        Season favorite = Season.SUMMER;
+//        System.out.println("Моё любимое время года: " + favorite
+//                + ", средняя температура: " + favorite.getAvgTemp()
+//                + ", описание: " + favorite.getDescription());
+//        printSeason(Season.WINTER);
+//        printSeason(Season.SUMMER);
+//        System.out.println("\nВсе времена года:");
+//        for (Season s : Season.values()) {
+//            System.out.println(s + " (" + s.getAvgTemp() + "°C): " + s.getDescription());
+//        }
+//    }
+//    static void printSeason(Season s) {
+//        switch (s) {
+//            case SUMMER: System.out.println("Я люблю лето"); break;
+//            case WINTER: System.out.println("Я люблю зиму"); break;
+//            case SPRING: System.out.println("Я люблю весну"); break;
+//            case AUTUMN: System.out.println("Я люблю осень"); break;
+//        }
+//    }
+//}
+//enum Season {
+//    WINTER(-5),
+//    SPRING(10),
+//    SUMMER(25) {
+//        @Override
+//        public String getDescription() {
+//            return "Тёплое время года";
+//        }
+//    },
+//    AUTUMN(8);
+//    private final int avgTemp;
+//    Season(int avgTemp) { this.avgTemp = avgTemp; }
+//    public int getAvgTemp() { return avgTemp; }
+//    public String getDescription() { return "Холодное время года"; }
+//}
+
+
+//Задание 2
+//import java.util.ArrayList;
+//import java.util.Scanner;
+//public class Main {
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        Shop shop = new Shop();
+//        System.out.print("Логин: ");
+//        String login = sc.nextLine();
+//        System.out.print("Пароль: ");
+//        String password = sc.nextLine();
+//        if (!shop.authenticate(login, password)) {
+//            System.out.println("Неверный логин/пароль");
+//            return;
+//        }
+//        System.out.println("Добро пожаловать!");
+//        shop.showCategories();
+//        System.out.print("Выберите каталог: ");
+//        String cat = sc.nextLine();
+//        shop.showProducts(cat);
+//        System.out.print("Введите название товара для корзины: ");
+//        String product = sc.nextLine();
+//        shop.addToCart(product);
+//        shop.checkout();
+//        sc.close();
+//    }
+//}
+//class Shop {
+//    private final String[][] products = {
+//            {"Ноутбук", "Смартфон", "Наушники"},
+//            {"Футболка", "Джинсы", "Куртка"},
+//            {"Хлеб", "Молоко", "Сыр"}
+//    };
+//    private final String[] categories = {"Электроника", "Одежда", "Продукты"};
+//    private final ArrayList<String> cart = new ArrayList<>();
+//    public boolean authenticate(String login, String password) {
+//        return login.equals("admin") && password.equals("1234");
+//    }
+//    public void showCategories() {
+//        System.out.println("Каталоги:");
+//        for (String c : categories) System.out.println("- " + c);
+//    }
+//    public void showProducts(String category) {
+//        for (int i = 0; i < categories.length; i++) {
+//            if (categories[i].equalsIgnoreCase(category)) {
+//                System.out.println("Товары в каталоге " + category + ":");
+//                for (String p : products[i]) System.out.println("  " + p);
+//                return;
+//            }
+//        }
+//        System.out.println("Каталог не найден");
+//    }
+//    public void addToCart(String product) {
+//        for (String[] arr : products)
+//            for (String p : arr)
+//                if (p.equalsIgnoreCase(product)) {
+//                    cart.add(p);
+//                    System.out.println("Товар добавлен в корзину: " + p);
+//                    return;
+//                }
+//        System.out.println("Товар не найден");
+//    }
+//    public void checkout() {
+//        if (cart.isEmpty()) {
+//            System.out.println("Корзина пуста");
+//        } else {
+//            System.out.println("Покупка совершена. Товары: " + cart);
+//        }
+//    }
+//}
