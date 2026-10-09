@@ -1,0 +1,151 @@
+//Задание 1
+//import java.util.Arrays;
+//import java.util.Random;
+//public class Main {
+//    public static void main(String[] args) {
+//        int n = 10;
+//        double[] arr1 = new double[n];
+//        for (int i = 0; i < n; i++) arr1[i] = Math.random() * 100;
+//        System.out.println("Math.random() до сортировки: " + Arrays.toString(arr1));
+//        Arrays.sort(arr1);
+//        System.out.println("Math.random() после сортировки: " + Arrays.toString(arr1));
+//        Random rand = new Random();
+//        double[] arr2 = new double[n];
+//        for (int i = 0; i < n; i++) arr2[i] = rand.nextDouble() * 100;
+//        System.out.println("Random до сортировки: " + Arrays.toString(arr2));
+//        Arrays.sort(arr2);
+//        System.out.println("Random после сортировки: " + Arrays.toString(arr2));
+//    }
+//}
+
+
+//Задание 3
+//import java.util.Random;
+//public class Main {
+//    public static void main(String[] args) {
+//        Random rand = new Random();
+//        int[] arr = new int[4];
+//        for (int i = 0; i < 4; i++) arr[i] = 10 + rand.nextInt(90);
+//        System.out.print("Массив: ");
+//        for (int x : arr) System.out.print(x + " ");
+//        System.out.println();
+//        boolean increasing = true;
+//        for (int i = 0; i < arr.length - 1; i++) {
+//            if (arr[i] >= arr[i + 1]) { increasing = false; break; }
+//        }
+//        System.out.println(increasing ? "Массив строго возрастающий" : "Массив НЕ строго возрастающий");
+//    }
+//}
+
+
+//Задание 4
+//import java.util.Random;
+//import java.util.Scanner;
+//public class Main {
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        int n;
+//        do {
+//            System.out.print("Введите натуральное число n > 0: ");
+//            while (!sc.hasNextInt()) { System.out.print("Ошибка! Введите целое: "); sc.next(); }
+//            n = sc.nextInt();
+//        } while (n <= 0);
+//        Random rand = new Random();
+//        int[] arr = new int[n];
+//        for (int i = 0; i < n; i++) arr[i] = rand.nextInt(n + 1);
+//        System.out.print("Исходный массив: ");
+//        for (int x : arr) System.out.print(x + " ");
+//        System.out.println();
+//        int count = 0;
+//        for (int x : arr) if (x % 2 == 0) count++;
+//        int[] even = new int[count];
+//        int idx = 0;
+//        for (int x : arr) if (x % 2 == 0) even[idx++] = x;
+//        System.out.print("Массив чётных: ");
+//        for (int x : even) System.out.print(x + " ");
+//        System.out.println();
+//        sc.close();
+//    }
+//}
+
+
+//Задание 1(оболочки)
+//public class Main {
+//    public static void main(String[] args) {
+//        Double d1 = Double.valueOf(3.14);
+//        Double d2 = Double.valueOf("2.71");
+//        double parsed = Double.parseDouble("5.55");
+//        System.out.println("parseDouble: " + parsed);
+//        double dv = d1.doubleValue();
+//        float fv = d1.floatValue();
+//        int iv = d1.intValue();
+//        long lv = d1.longValue();
+//        short sv = d1.shortValue();
+//        byte bv = d1.byteValue();
+//        System.out.println("double: " + dv + ", float: " + fv + ", int: " + iv
+//                + ", long: " + lv + ", short: " + sv + ", byte: " + bv);
+//        System.out.println("d1 = " + d1 + ", d2 = " + d2);
+//        String s = Double.toString(3.14);
+//        System.out.println("Строка: " + s);
+//    }
+//}
+
+
+//Задание 2(оболочки)
+//public class Main {
+//    public static void main(String[] args) {
+//        Byte b = 10;
+//        Double d = 3.99;
+//        Float f = 2.5f;
+//        Integer i = 42;
+//        Long l = 100L;
+//        Short s = 7;
+//
+//        System.out.println("byteValue:   " + b.byteValue() + ", " + d.byteValue() + ", "
+//                + f.byteValue() + ", " + i.byteValue() + ", " + l.byteValue() + ", " + s.byteValue());
+//        System.out.println("doubleValue: " + b.doubleValue() + ", " + d.doubleValue() + ", "
+//                + f.doubleValue() + ", " + i.doubleValue() + ", " + l.doubleValue() + ", " + s.doubleValue());
+//        System.out.println("floatValue:  " + b.floatValue() + ", " + d.floatValue() + ", "
+//                + f.floatValue() + ", " + i.floatValue() + ", " + l.floatValue() + ", " + s.floatValue());
+//        System.out.println("intValue:    " + b.intValue() + ", " + d.intValue() + ", "
+//                + f.intValue() + ", " + i.intValue() + ", " + l.intValue() + ", " + s.intValue());
+//        System.out.println("longValue:   " + b.longValue() + ", " + d.longValue() + ", "
+//                + f.longValue() + ", " + i.longValue() + ", " + l.longValue() + ", " + s.longValue());
+//        System.out.println("shortValue:  " + b.shortValue() + ", " + d.shortValue() + ", "
+//                + f.shortValue() + ", " + i.shortValue() + ", " + l.shortValue() + ", " + s.shortValue());
+//
+//        System.out.println("parseInt:    " + Integer.parseInt("123"));
+//        System.out.println("parseDouble: " + Double.parseDouble("3.14"));
+//        System.out.println("parseBoolean:" + Boolean.parseBoolean("true"));
+//        System.out.println("parseByte:   " + Byte.parseByte("12"));
+//        System.out.println("parseFloat:  " + Float.parseFloat("2.5"));
+//        System.out.println("parseLong:   " + Long.parseLong("999"));
+//        System.out.println("parseShort:  " + Short.parseShort("5"));
+//    }
+//}
+
+
+
+
+//Задание 1 на форматирование строк
+//import java.util.Formatter;
+//public class Main {
+//    public static void main(String[] args) {
+//        double x = 11.635;
+//        double y = 1000.0 / 3.0;
+//        System.out.printf("Значение e = %.3f%n", Math.E);
+//        System.out.printf("exp(%.3f) = %.3f%n", x, Math.exp(x));
+//        System.out.printf("Число y с точностью 2 знака: %.2f%n", y);
+//        System.out.printf("Число y с шириной 10 и точностью 2: %10.2f%n", y);
+//        System.out.printf("Процент: %.2f%%%n", 0.756 * 100);
+//        Formatter formatter = new Formatter();
+//        formatter.format("Строка с форматированием: %.2f%n", y);
+//        formatter.format("Строка с форматированием: %8.2f%n", y);
+//        formatter.format("Строка с форматированием: %16.2f%n", y);
+//        System.out.println(formatter);
+//        formatter.close();
+//    }
+//}
+
+
+
