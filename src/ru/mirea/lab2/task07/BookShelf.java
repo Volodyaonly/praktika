@@ -1,0 +1,48 @@
+package ru.mirea.lab2.task07;
+
+public class BookShelf {
+    private final Book[] books;
+    private int bookCount;
+    public BookShelf(int size) {
+        if (size < 0) {
+            throw new IllegalArgumentException("Размер полки не может быть отрицательным.");
+        }
+        books = new Book[size];
+        bookCount = 0;
+    }
+    public void addBook(Book book) {
+        if (book == null) {
+            throw new IllegalArgumentException("Книга не должна быть null.");
+        }
+        if (bookCount >= books.length) {
+            throw new IllegalStateException("Книжная полка заполнена.");
+        }
+        books[bookCount++] = book;
+    }
+    public Book getLatest() {
+        if (bookCount == 0) return null;
+        Book latest = books[0];
+        for (int index = 1; index < bookCount; index++)
+            if (books[index].getYear() > latest.getYear()) latest = books[index];
+        return latest;
+    }
+    public Book getEarliest() {
+        if (bookCount == 0) return null;
+        Book earliest = books[0];
+        for (int index = 1; index < bookCount; index++)
+            if (books[index].getYear() < earliest.getYear()) earliest = books[index];
+        return earliest;
+    }
+    public void sortByYear() {
+        for (int index = 0; index < bookCount - 1; index++)
+            for (int indexToCompare = 0; indexToCompare < bookCount - index - 1; indexToCompare++)
+                if (books[indexToCompare].getYear() > books[indexToCompare + 1].getYear()) {
+                    Book temporaryBook = books[indexToCompare];
+                    books[indexToCompare] = books[indexToCompare + 1];
+                    books[indexToCompare + 1] = temporaryBook;
+                }
+    }
+    public void printAll() {
+        for (int index = 0; index < bookCount; index++) System.out.println(books[index]);
+    }
+}
