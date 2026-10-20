@@ -1,31 +1,52 @@
 package ru.mirea.lab4.task02;
 
 import java.util.Scanner;
-import ru.mirea.common.ConsoleInput;
 
 /** Практика 4: учебный интернет-магазин. */
 public class Main {
     public static void main(String[] args) {
         Shop shop = new Shop();
-        try (Scanner scanner = new Scanner(System.in)) {
-            String login = ConsoleInput.readLine(scanner, "Логин: ");
-            String password = ConsoleInput.readLine(scanner, "Пароль: ");
-            if (!shop.authenticate(login, password)) {
-                System.out.println("Неверный логин/пароль");
-                return;
-            }
-            System.out.println("Добро пожаловать!");
-            shop.showCategories();
-            String category = ConsoleInput.readLine(scanner, "Выберите каталог: ").trim();
-            if (!shop.showProducts(category)) {
-                return;
-            }
-            String product = ConsoleInput.readLine(scanner, "Введите название товара для корзины: ").trim();
-            if (shop.addToCart(product)) {
-                shop.checkout();
-            }
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Логин: ");
+        if (!scanner.hasNextLine()) {
+            System.out.println("Ввод завершён");
+            return;
+        }
+        String login = scanner.nextLine();
+
+        System.out.print("Пароль: ");
+        if (!scanner.hasNextLine()) {
+            System.out.println("Ввод завершён");
+            return;
+        }
+        String password = scanner.nextLine();
+
+        if (!shop.authenticate(login, password)) {
+            System.out.println("Неверный логин/пароль");
+            return;
+        }
+        System.out.println("Добро пожаловать!");
+        shop.showCategories();
+
+        System.out.print("Выберите каталог: ");
+        if (!scanner.hasNextLine()) {
+            System.out.println("Ввод завершён");
+            return;
+        }
+        String category = scanner.nextLine().trim();
+        if (!shop.showProducts(category)) {
+            return;
+        }
+
+        System.out.print("Введите название товара для корзины: ");
+        if (!scanner.hasNextLine()) {
+            System.out.println("Ввод завершён");
+            return;
+        }
+        String product = scanner.nextLine().trim();
+        if (shop.addToCart(product)) {
+            shop.checkout();
         }
     }
 }

@@ -1,35 +1,54 @@
 package ru.mirea.lab2.task08;
 
 import java.util.Scanner;
-import ru.mirea.common.ConsoleInput;
 
 /** Практика 2, задание 8: обратный порядок строк. */
 public class Main {
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            int length = ConsoleInput.readInt(scanner, "Введите количество строк: ", 0, Integer.MAX_VALUE);
-            if (scanner.hasNextLine()) {
-                scanner.nextLine(); // Убираем конец строки после числа.
+        Scanner scanner = new Scanner(System.in);
+        int length;
+        while (true) {
+            System.out.print("Введите количество строк: ");
+            if (!scanner.hasNext()) {
+                System.out.println("Ввод завершён");
+                return;
             }
-            String[] values = new String[length];
-            for (int index = 0; index < length; index++) {
-                values[index] = ConsoleInput.readLine(scanner, "Строка " + (index + 1) + ": ");
+            if (!scanner.hasNextInt()) {
+                scanner.next();
+                System.out.println("Ошибка: введите целое число");
+                continue;
             }
-            String[] reversed = new String[length];
-            for (int index = 0; index < length; index++) {
-                reversed[index] = values[length - 1 - index];
+            length = scanner.nextInt();
+            if (length >= 0) {
+                break;
             }
-            System.out.println("Исходный массив: ");
-            for (String value : values) {
-                System.out.print(value + " ");
-            }
-            System.out.println("\nОбратный массив: ");
-            for (String value : reversed) {
-                System.out.print(value + " ");
-            }
-            System.out.println();
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+            System.out.println("Ошибка: количество строк не может быть отрицательным");
         }
+        scanner.nextLine();
+
+        String[] values = new String[length];
+        for (int i = 0; i < length; i++) {
+            System.out.print("Строка " + (i + 1) + ": ");
+            if (!scanner.hasNextLine()) {
+                System.out.println("Ввод завершён");
+                return;
+            }
+            values[i] = scanner.nextLine();
+        }
+
+        String[] reversed = new String[length];
+        for (int i = 0; i < length; i++) {
+            reversed[i] = values[length - 1 - i];
+        }
+
+        System.out.println("Исходный массив: ");
+        for (int i = 0; i < values.length; i++) {
+            System.out.print(values[i] + " ");
+        }
+        System.out.println("\nОбратный массив: ");
+        for (int i = 0; i < reversed.length; i++) {
+            System.out.print(reversed[i] + " ");
+        }
+        System.out.println();
     }
 }

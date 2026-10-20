@@ -1,4 +1,3 @@
-src/ru/mirea/common/ConsoleInput.java
 src/ru/mirea/common/Printable.java
 src/ru/mirea/common/movement/Movable.java
 src/ru/mirea/common/movement/MovableCircle.java
