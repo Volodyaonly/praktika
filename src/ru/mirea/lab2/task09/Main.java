@@ -1,38 +1,58 @@
 package ru.mirea.lab2.task09;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
-import ru.mirea.common.ConsoleInput;
 
 /** Практика 2, задание 9: раздача карт. */
 public class Main {
-    private static final int CARDS_PER_PLAYER = 5;
-
     public static void main(String[] args) {
         String[] suits = {"Пики", "Черви", "Бубны", "Трефы"};
         String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "В", "Д", "К", "Т"};
-        ArrayList<String> deck = new ArrayList<>();
-        for (String suit : suits) {
-            for (String rank : ranks) {
-                deck.add(rank + " " + suit);
+        String[] deck = new String[52];
+
+        int index = 0;
+        for (int i = 0; i < suits.length; i++) {
+            for (int j = 0; j < ranks.length; j++) {
+                deck[index] = ranks[j] + " " + suits[i];
+                index++;
             }
         }
-        Collections.shuffle(deck);
 
-        try (Scanner scanner = new Scanner(System.in)) {
-            int maximumPlayers = deck.size() / CARDS_PER_PLAYER;
-            int players = ConsoleInput.readInt(scanner, "Введите число игроков: ", 1, maximumPlayers);
-            int nextCard = 0;
-            for (int player = 1; player <= players; player++) {
-                System.out.println("Игрок " + player + ":");
-                for (int card = 0; card < CARDS_PER_PLAYER; card++) {
-                    System.out.println("  " + deck.get(nextCard++));
-                }
-                System.out.println();
+        // Перемешиваем колоду, меняя две карты местами.
+        for (int i = deck.length - 1; i > 0; i--) {
+            int randomIndex = (int) (Math.random() * (i + 1));
+            String temporary = deck[i];
+            deck[i] = deck[randomIndex];
+            deck[randomIndex] = temporary;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int players;
+        while (true) {
+            System.out.print("Введите число игроков (от 1 до 10): ");
+            if (!scanner.hasNext()) {
+                System.out.println("Ввод завершён");
+                return;
             }
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+            if (!scanner.hasNextInt()) {
+                scanner.next();
+                System.out.println("Ошибка: нужно ввести целое число");
+                continue;
+            }
+            players = scanner.nextInt();
+            if (players >= 1 && players <= 10) {
+                break;
+            }
+            System.out.println("Ошибка: число игроков должно быть от 1 до 10");
+        }
+
+        int nextCard = 0;
+        for (int player = 1; player <= players; player++) {
+            System.out.println("Игрок " + player + ":");
+            for (int card = 0; card < 5; card++) {
+                System.out.println("  " + deck[nextCard]);
+                nextCard++;
+            }
+            System.out.println();
         }
     }
 }
