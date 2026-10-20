@@ -10,7 +10,7 @@ import ru.mirea.lab2.task07.BookShelf;
 import ru.mirea.lab7.math.MathFunc;
 import ru.mirea.lab7.strings.ProcessStrings;
 
-/** Проверки ошибок, которые не обнаруживаются одним запуском демонстрационных данных. */
+/** Проверка основных и граничных случаев учебных заданий. */
 public class RegressionChecks {
     private static int checks;
 
