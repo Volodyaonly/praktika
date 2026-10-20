@@ -17,9 +17,6 @@ public class Dog {
         return age;
     }
     public void setAge(int age) {
-        if (age < 0) {
-            throw new IllegalArgumentException("Возраст не может быть отрицательным.");
-        }
         this.age = age;
     }
     public int getHumanAge() {

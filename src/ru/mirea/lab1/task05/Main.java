@@ -7,9 +7,6 @@ import ru.mirea.common.ConsoleInput;
 /** Практика 1: факториал без переполнения int. */
 public class Main {
     public static BigInteger factorial(int number) {
-        if (number < 0) {
-            throw new IllegalArgumentException("Факториал определён только для неотрицательных чисел.");
-        }
         BigInteger result = BigInteger.ONE;
         for (long factor = 2; factor <= number; factor++) {
             result = result.multiply(BigInteger.valueOf(factor));
@@ -26,6 +23,10 @@ public class Main {
                 try (Scanner scanner = new Scanner(System.in)) {
                     number = ConsoleInput.readInt(scanner, "Введите число для факториала: ", 0, Integer.MAX_VALUE);
                 }
+            }
+            if (number < 0) {
+                System.out.println("Факториал определён только для неотрицательных чисел.");
+                return;
             }
             System.out.println(number + "! = " + factorial(number));
         } catch (NumberFormatException exception) {

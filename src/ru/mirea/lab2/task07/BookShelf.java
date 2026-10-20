@@ -8,13 +8,10 @@ public class BookShelf {
         bookCount = 0;
     }
     public void addBook(Book book) {
-        if (book == null) {
-            throw new IllegalArgumentException("Книга не должна быть null.");
+        if (book != null && bookCount < books.length) {
+            books[bookCount] = book;
+            bookCount++;
         }
-        if (bookCount >= books.length) {
-            throw new IllegalStateException("Книжная полка заполнена.");
-        }
-        books[bookCount++] = book;
     }
     public Book getLatest() {
         if (bookCount == 0) return null;

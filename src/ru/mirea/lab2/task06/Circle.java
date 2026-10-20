@@ -9,9 +9,6 @@ public class Circle {
         return radius;
     }
     public void setRadius(double radius) {
-        if (!Double.isFinite(radius) || radius < 0) {
-            throw new IllegalArgumentException("Радиус должен быть конечным неотрицательным числом.");
-        }
         this.radius = radius;
     }
     public double getArea() {

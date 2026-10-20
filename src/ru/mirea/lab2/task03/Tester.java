@@ -4,14 +4,6 @@ public class Tester {
     private Circle[] circles;
     private int circleCount;
     public Tester(Circle[] circles, int circleCount) {
-        if (circles == null || circleCount < 1 || circleCount > circles.length) {
-            throw new IllegalArgumentException("Нужна хотя бы одна окружность, а количество не должно превышать размер массива.");
-        }
-        for (int index = 0; index < circleCount; index++) {
-            if (circles[index] == null) {
-                throw new IllegalArgumentException("В массиве окружностей не должно быть null.");
-            }
-        }
         this.circles = circles;
         this.circleCount = circleCount;
     }

@@ -5,9 +5,6 @@ public class Circle {
     private final double radius;
     public Circle(Point center, double radius) {
         this.center = center;
-        if (!Double.isFinite(radius) || radius < 0) {
-            throw new IllegalArgumentException("Радиус должен быть конечным неотрицательным числом.");
-        }
         this.radius = radius;
     }
     public Point getCenter() {

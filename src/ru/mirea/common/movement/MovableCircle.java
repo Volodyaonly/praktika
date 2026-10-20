@@ -5,9 +5,6 @@ public class MovableCircle implements Movable {
     private final MovablePoint center;
     public MovableCircle(int x, int y, int xSpeed, int ySpeed, int radius) {
         this.center = new MovablePoint(x, y, xSpeed, ySpeed);
-        if (radius < 0) {
-            throw new IllegalArgumentException("Радиус не может быть отрицательным.");
-        }
         this.radius = radius;
     }
     @Override
