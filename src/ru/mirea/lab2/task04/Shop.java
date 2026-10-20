@@ -1,22 +1,50 @@
 package ru.mirea.lab2.task04;
 
-import java.util.ArrayList;
-
 public class Shop {
-    private final ArrayList<Computer> computers = new ArrayList<>();
+    private Computer[] computers = new Computer[10];
+    private int count = 0;
+
     public void addComputer(Computer computer) {
-        computers.add(computer);
+        if (count == computers.length) {
+            Computer[] bigger = new Computer[computers.length * 2];
+            for (int i = 0; i < count; i++) {
+                bigger[i] = computers[i];
+            }
+            computers = bigger;
+        }
+        computers[count] = computer;
+        count++;
     }
+
     public void removeByBrand(String brand) {
-        computers.removeIf(computer -> computer.getBrand().equalsIgnoreCase(brand));
+        for (int i = 0; i < count; i++) {
+            if (computers[i].getBrand().equalsIgnoreCase(brand)) {
+                for (int j = i; j < count - 1; j++) {
+                    computers[j] = computers[j + 1];
+                }
+                count--;
+                computers[count] = null;
+                i--;
+            }
+        }
     }
+
     public Computer findByBrand(String brand) {
-        for (Computer computer : computers)
-            if (computer.getBrand().equalsIgnoreCase(brand)) return computer;
+        for (int i = 0; i < count; i++) {
+            if (computers[i].getBrand().equalsIgnoreCase(brand)) {
+                return computers[i];
+            }
+        }
         return null;
     }
+
     public void printAll() {
-        if (computers.isEmpty()) System.out.println("Магазин пуст");
-        else for (Computer computer : computers) System.out.println(computer);
+        if (count == 0) {
+            System.out.println("Магазин пуст");
+        } else {
+            for (int i = 0; i < count; i++) {
+                System.out.println(computers[i]);
+            }
+        }
     }
 }
