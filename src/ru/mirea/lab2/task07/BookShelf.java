@@ -4,9 +4,6 @@ public class BookShelf {
     private final Book[] books;
     private int bookCount;
     public BookShelf(int size) {
-        if (size < 0) {
-            throw new IllegalArgumentException("Размер полки не может быть отрицательным.");
-        }
         books = new Book[size];
         bookCount = 0;
     }
