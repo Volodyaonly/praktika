@@ -46,7 +46,7 @@ CASES = {
     "lab14.task04": ("1+\n", "false"),
     "lab14.task05": ("29/02/2000\n", "true"),
     "lab14.task06": ("root@localhost\n", "true"),
-    "lab14.task07": ("TrySpy1\n", "true"),
+    "lab14.task07": ("F032_Password\n", "true"),
     "lab14.task08": ("", "слон машина"),
     "lab14.task09": ("мама\n", "а: 2"),
 }
