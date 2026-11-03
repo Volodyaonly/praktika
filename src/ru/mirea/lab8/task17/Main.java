@@ -1,6 +1,8 @@
 package ru.mirea.lab8.task17;
 
 
+import java.util.Scanner;
+
 public class Main {
     static class Reader {
         Scanner sc = new Scanner(System.in);
