@@ -18,3 +18,5 @@ jobs:
           java-version: '17'
       - name: Verify all exercises
         run: python3 tests/check_examples.py
+      - name: Verify practices 8-14
+        run: python3 tests/check_new_practices.py
