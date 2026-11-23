@@ -12,9 +12,16 @@ public class Person {
     }
 
     public String shortName() {
-        String result = surname;
-        if (name != null && !name.isEmpty()) result += " " + name.charAt(0) + ".";
-        if (patronymic != null && !patronymic.isEmpty()) result += patronymic.charAt(0) + ".";
-        return result;
+        StringBuilder result = new StringBuilder(surname == null ? "" : surname.trim());
+        boolean hasFirstName = name != null && !name.isBlank();
+        if (hasFirstName) {
+            if (result.length() > 0) result.append(' ');
+            result.append(name.trim().charAt(0)).append('.');
+        }
+        if (patronymic != null && !patronymic.isBlank()) {
+            if (!hasFirstName && result.length() > 0) result.append(' ');
+            result.append(patronymic.trim().charAt(0)).append('.');
+        }
+        return result.toString();
     }
 }
