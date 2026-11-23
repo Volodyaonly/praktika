@@ -1,4 +1,6 @@
 import java.math.BigInteger;
+import ru.mirea.lab13.task02.Person;
+import ru.mirea.lab13.task05.PhoneNumber;
 import ru.mirea.common.movement.MovablePoint;
 import ru.mirea.common.movement.MovableRectangle;
 import ru.mirea.lab2.task03.Circle;
@@ -66,6 +68,19 @@ public class RegressionChecks {
         check(processor.oddPositions("😀AБ").equals("😀Б"), "Эмодзи нельзя разрывать на половины");
         check(processor.reverse("A😀Б").equals("Б😀A"), "Разворот должен сохранять эмодзи");
         check(processor.countChars("") == 0 && processor.oddPositions("").isEmpty() && processor.reverse("").isEmpty(), "Пустая строка должна обрабатываться");
+
+        check(new Person("Иванов", "", "Сергеевич").shortName().equals("Иванов С."),
+                "Отсутствующее имя не должно склеивать фамилию и отчество");
+        check(new Person("Иванов", "Иван", "Сергеевич").shortName().equals("Иванов И.С."),
+                "Формат Фамилия И.О. нарушен");
+        check(PhoneNumber.format("+79175655655").equals("+7917-565-5655"),
+                "Некорректный международный формат");
+        check(PhoneNumber.format("89175655655").equals("+7917-565-5655"),
+                "Некорректный российский формат");
+        check(PhoneNumber.format("+abc1234567890").equals("Неверный номер"),
+                "Код страны должен быть цифровым");
+        check(PhoneNumber.format("+1234x6789012").equals("Неверный номер"),
+                "В номере не должно быть букв");
 
         System.out.println("Проверок граничных случаев: " + checks);
     }

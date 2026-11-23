@@ -44,6 +44,18 @@ def main():
             assert run.returncode == 0 and expected in run.stdout, (
                 f"Практика {number}\n{run.stdout}\n{run.stderr}"
             )
+            if number == 8:
+                for task, data, expected in [
+                    ("ru.mirea.lab8.task17.Main", "2\n5\n5\n0\n", "5"),
+                    ("ru.mirea.lab8.task01.Main", "6\n", "1 2 2 3 3 3"),
+                ]:
+                    extra = subprocess.run(
+                        ["java", "-Dfile.encoding=UTF-8", "-cp", str(destination), task],
+                        input=data, cwd=folder, capture_output=True, text=True, timeout=10,
+                    )
+                    assert extra.returncode == 0 and expected in extra.stdout, (
+                        f"{task}\n{extra.stdout}\n{extra.stderr}"
+                    )
             print(f"Практика {number}: {len(sources)} файлов, компиляция и запуск OK")
             total += len(sources)
     print(f"Проверено {len(NUMBERS)} отдельных папок и {total} Java-файлов")
