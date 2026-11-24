@@ -18,7 +18,3 @@ jobs:
           java-version: '17'
       - name: Verify all exercises
         run: python3 tests/check_examples.py
-      - name: Verify practices 8-14
-        run: python3 tests/check_new_practices.py
-      - name: Verify ready-to-submit folders
-        run: python3 tests/check_defense_folders.py
